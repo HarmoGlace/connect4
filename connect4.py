@@ -35,8 +35,7 @@ class Connect4Party:
     def __str__(self):
         lines = []
         for line_number in range(0, self.height - 1):
-            lines.append(''.join(list(map(lambda case: case.color if case.color else self.default_color, self.cases[line_number * (
-                        self.width - 1): self.width * (line_number + 1) - 1]))))
+            lines.append(''.join(list(map(lambda case: case.color if case.color else self.default_color, self.cases[line_number * self.width: self.width * (line_number + 1)]))))
 
 
 
