@@ -1,6 +1,6 @@
 class Connect4Party:
     def __init__(self, players, height=6, width=7):
-        self.players = list(map(lambda player: player.__str__(), players))
+        self.players = list(map(lambda player: player.__str__, players))
         if len(players) <= 1:
             raise Exception(f'Please provide at least two players. Received only {len(players)} player(s)')
 
@@ -30,5 +30,10 @@ class Connect4Party:
     def results(self):
         return ''
 
+
     def __str__(self):
-        return 'lol'
+        lines = []
+        for line_number in range(0, self.height - 1):
+            lines.append(''.join(list(map(lambda case: case.color, self.cases[line_number * (self.width - 1): self.width * (line_number + 1) - 1]))))
+        return '\n'.join(lines.reverse())
+
