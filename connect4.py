@@ -9,7 +9,8 @@ class Connect4Party:
         self.height = height
         self.width = width
         self.default_color = '⚫'
-        self.cases = list(map(lambda position: Case(None, position), range(0, height * width - 1)))
+        self.cases = list(map(lambda position: Case(None, position), range(0, height * width)))
+
 
         self.__player_position = 0
 
