@@ -34,10 +34,15 @@ class Connect4Party:
         return ''
 
     def __str__(self):
+        lines = self.__list__()
+        return '\n'.join(lines)
+
+
+    def __list__(self):
         lines = []
         for line_number in range(0, self.height):
             lines.append(''.join(list(map(lambda case: case.color if case.color else self.default_color, self.cases[line_number * self.width: self.width * (line_number + 1)]))))
 
 
         lines.reverse()
-        return '\n'.join(lines)
+        return lines
