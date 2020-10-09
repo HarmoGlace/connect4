@@ -1,5 +1,6 @@
 from case import Case
 
+
 class Connect4Party:
     def __init__(self, players, height=6, width=7):
         self.players = list(map(lambda player: player.__str__, players))
@@ -10,7 +11,6 @@ class Connect4Party:
         self.width = width
         self.default_color = '⚫'
         self.cases = list(map(lambda position: Case(None, position), range(0, height * width)))
-
 
         self.__player_position = 0
 
@@ -37,12 +37,11 @@ class Connect4Party:
         lines = self.__list__()
         return '\n'.join(lines)
 
-
     def __list__(self):
         lines = []
         for line_number in range(0, self.height):
-            lines.append(''.join(list(map(lambda case: case.color if case.color else self.default_color, self.cases[line_number * self.width: self.width * (line_number + 1)]))))
-
+            lines.append(''.join(list(map(lambda case: case.color if case.color else self.default_color,
+                                          self.cases[line_number * self.width: self.width * (line_number + 1)]))))
 
         lines.reverse()
         return lines
