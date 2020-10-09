@@ -5,7 +5,7 @@ from math import floor
 class CasesTypes(Enum):
     red = ''
     yellow = ''
-    default = '⚫'
+    blank = '⚫'
 
 
 class Case:
@@ -16,7 +16,7 @@ class Case:
 
     @property
     def color(self):
-        return CasesTypes(self.color_name if self.color_name else 'default')
+        return CasesTypes(self.color_name if self.color_name else 'blank')
 
     @property
     def empty(self):
@@ -29,5 +29,5 @@ class Case:
     @property
     def player(self):
         for player in self.party.players:
-            if player.case.position == self.position:
+            if player.color == self.color:
                 return player

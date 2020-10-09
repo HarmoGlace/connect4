@@ -1,10 +1,10 @@
-from math import floor
 from case import Case
+from player import Player
 
 
 class Connect4Party:
     def __init__(self, players, height=6, width=7):
-        self.players = list(map(lambda player: { 'id': player.id, 'color': player.color}, players))
+        self.players = list(map(lambda player: Player(player['id'], player['case']), players))
         if len(players) <= 1:
             raise Exception(f'Please provide at least two players. Received only {len(players)} player(s)')
 
@@ -59,7 +59,7 @@ class Connect4Party:
                     or self.__check_cases__(case, lambda check_case, checks: check_case.position <= case.position + (self.width + 1) * 4 and check_case.line == case.line + checks) \
                     :
                     return { 'finished': True, 'winner': case.player }
-    
+
         return { 'finished': False, 'winner': None }
 
     def __str__(self):
