@@ -37,7 +37,9 @@ class Connect4Party:
     def __check_cases__(self, case, condition, increase):
         checks = 0
         index = case.position
-        current_case = lambda: self.cases[index]
+
+        def current_case():
+            return self.cases[index]
 
         while condition(current_case(), checks) & index < len(self.cases):
             if self.cases[index].color_name != case.color_name:
@@ -54,13 +56,13 @@ class Connect4Party:
         for case in self.cases:
             # Checks
             if self.__check_cases__(case, lambda check_case: check_case.index <= case.position + 4 and check_case.line == case.line, 1) \
-                or self.__check_cases__(case, lambda check_case: check_case.position <= case.position + (self.width * 4), self.width) \
-                or self.__check_cases__(case, lambda check_case, checks: check_case.position <= case.position + (self.width + 1) * 4 and check_case.line == case.line + checks, self.width - 1)\
-                    or self.__check_cases__(case, lambda check_case, checks: check_case.position <= case.position + (self.width + 1) * 4 and check_case.line == case.line + checks) \
+                    or self.__check_cases__(case, lambda check_case: check_case.position <= case.position + (self.width * 4), self.width) \
+                    or self.__check_cases__(case, lambda check_case, checks: check_case.position <= case.position + (self.width + 1) * 4 and check_case.line == case.line + checks, self.width - 1) \
+                    or self.__check_cases__(case, lambda check_case, checks: check_case.position <= case.position + (self.width + 1) * 4 and check_case.line == case.line + checks, self.width + 1) \
                     :
-                    return { 'finished': True, 'winner': case.player }
+                return {'finished': True, 'winner': case.player}
 
-        return { 'finished': False, 'winner': None }
+        return {'finished': False, 'winner': None}
 
     def __str__(self):
         lines = self.__list__()
