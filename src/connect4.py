@@ -85,8 +85,8 @@ class Connect4Party:
 
         return {'finished': self.full, 'winner': None}
 
-    def __str__(self):
-        lines = self.__list__()
+    def __str__(self, *args):
+        lines = self.__list__(*args)
         return '\n'.join(lines)
 
     def __list__(self, numbers=True):
