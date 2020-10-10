@@ -2,21 +2,10 @@ from connect4 import Connect4Party
 
 party = Connect4Party([{'id': 'lol', 'case': 'red'}, {'id': 'another', 'case': 'yellow'}])
 
-print(party.__str__())
+while not party.results['finished']:
+    print(party.__str__())
+    current_player = party.current_player
+    column_number = int(input(f'{current_player.id}, play now! '))
 
-print(party.results)
-
-column = party.get_column(0)
-
-returned = column.add_piece('yellow')
-column.add_piece('yellow')
-column.add_piece('red')
-
-print(returned)
-
-print(column.full)
-
-for case in column.cases:
-    print(case.position, case.color_name)
-
-print(party.__str__())
+    party.get_column(column_number).add_piece(current_player.color)
+    party.increment_player()
