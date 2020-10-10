@@ -1,3 +1,5 @@
+from termcolor import colored
+
 from case import Case
 from column import Column
 from player import Player
@@ -87,7 +89,7 @@ class Connect4Party:
     def __list__(self):
         lines = []
         for line_number in range(0, self.height):
-            lines.append(''.join(list(map(lambda case: case.color if case.color else self.default_color,
+            lines.append(''.join(list(map(lambda case: colored('🟡', case.real_color_name),
                                           self.cases[line_number * self.width: self.width * (line_number + 1)]))))
 
         lines.reverse()

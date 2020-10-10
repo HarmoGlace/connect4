@@ -26,8 +26,12 @@ class Case:
             self.__color_name = color_name
 
     @property
+    def real_color_name(self):
+        return self.color_name if self.color_name else 'white'
+
+    @property
     def color(self):
-        return CasesTypes[self.color_name if self.color_name else 'white'].value
+        return CasesTypes[self.real_color_name].value
 
     @property
     def empty(self):
