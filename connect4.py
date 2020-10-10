@@ -17,7 +17,7 @@ class Connect4Party:
 
     @property
     def full(self):
-        return not len(list(filter(lambda case: case.color_name is not None, self.cases)))
+        return len(list(filter(lambda case: case.color_name is not None, self.cases))) != 0
 
     @property
     def current_player(self):
@@ -67,14 +67,14 @@ class Connect4Party:
 
         for case in self.cases:
             # Checks
-            if self.__check_cases__(case, linear_check, 1) \
+            if case.color_name is not None and (self.__check_cases__(case, linear_check, 1) \
                     or self.__check_cases__(case, upward_check, self.width) \
                     or self.__check_cases__(case, diag_left_to_right_check, self.width - 1) \
-                    or self.__check_cases__(case, diag_right_to_left_check, self.width + 1) \
+                    or self.__check_cases__(case, diag_right_to_left_check, self.width + 1)) \
                     :
                 return {'finished': True, 'winner': case.player}
 
-        return {'finished': False, 'winner': None}
+        return {'finished': self.full, 'winner': None}
 
     def __str__(self):
         lines = self.__list__()
