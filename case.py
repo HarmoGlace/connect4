@@ -17,6 +17,15 @@ class Case:
         self.column = Column(party, self.position % party.width)
 
     @property
+    def color_name(self):
+        return self.__color_name
+
+    @color_name.setter
+    def color_name(self, color_name):
+        if CasesTypes[color_name if color_name else 'blank']:
+            self.__color_name = color_name
+
+    @property
     def color(self):
         return CasesTypes[self.color_name if self.color_name else 'blank'].value
 

@@ -8,7 +8,14 @@ print(party.results)
 
 column = party.get_column(0)
 
+returned = column.add_piece('yellow')
+column.add_piece('yellow')
+column.add_piece('red')
+
+print(returned)
+
 print(column.full)
 
 for case in column.cases:
-    print(case.position)
+    print(case.position, case.color_name)
+
