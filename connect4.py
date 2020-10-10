@@ -40,6 +40,7 @@ class Connect4Party:
         return self.current_player
 
     def get_column(self, number):
+        if number < 0 or number >= self.width: return None
         return Column(self, number)
 
     def __check_cases__(self, case, condition, increase):

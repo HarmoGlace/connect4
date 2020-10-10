@@ -44,5 +44,5 @@ class Case:
     @property
     def player(self):
         for player in self.party.players:
-            if player.color == self.color:
+            if player.color == self.real_color_name:
                 return player

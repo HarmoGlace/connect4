@@ -5,9 +5,26 @@ party = Connect4Party([{'id': 'lol', 'case': 'red'}, {'id': 'another', 'case': '
 while not party.results['finished']:
     print(party.__str__())
     current_player = party.current_player
-    column_number = int(input(f'{current_player.id}, play now! ')) + 1
+    raw_column_number = input(f'{current_player.id}, play now! ')
 
-    party.get_column(column_number).add_piece(current_player.color)
+
+    try:
+        column_number = int(raw_column_number) - 1
+    except:
+        print('Please provide a valid number')
+        continue
+
+    column = party.get_column(column_number)
+
+    if not column:
+        print('Please provide a valid column number!')
+        continue
+
+    column.add_piece(current_player.color)
+
     party.increment_player()
 
-print('finished lol')
+winner = party.results['winner']
+name = winner is not None if winner.id else 'nobody'
+print('The party is finished!')
+print(f'The winner is {name}')
