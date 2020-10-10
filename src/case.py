@@ -1,6 +1,6 @@
 from enum import Enum
 from math import floor
-from column import Column
+from src.column import Column
 
 
 class CasesTypes(Enum):

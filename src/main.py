@@ -1,4 +1,4 @@
-from connect4 import Connect4Party
+from src.connect4 import Connect4Party
 from termcolor import colored
 
 
