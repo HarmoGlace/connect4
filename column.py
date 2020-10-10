@@ -24,3 +24,4 @@ class Column:
 
         to_add = self.blank_cases[0]
         to_add.color_name = color_name
+        return True

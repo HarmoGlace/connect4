@@ -17,8 +17,9 @@ def print_colors():
     return print(players)
 
 
+clear_console()
+
 while not party.results['finished']:
-    clear_console()
     print(party.__str__())
     print_colors()
 
@@ -28,18 +29,27 @@ while not party.results['finished']:
     try:
         column_number = int(raw_column_number) - 1
     except:
+        clear_console()
         print('Please provide a valid column number')
         continue
 
     column = party.get_column(column_number)
 
     if not column:
+        clear_console()
         print('Please provide a valid column number!')
         continue
 
-    column.add_piece(current_player.color)
+    added = column.add_piece(current_player.color)
+    print(added)
+
+    if not added:
+        clear_console()
+        print('This column is full. Please provide another column number!')
+        continue
 
     party.increment_player()
+    clear_console()
 
 clear_console()
 print(party.__str__())

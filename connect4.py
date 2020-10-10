@@ -50,7 +50,7 @@ class Connect4Party:
         def current_case():
             return self.cases[index]
 
-        while condition(current_case(), checks, case) and index < len(self.cases):
+        while index < len(self.cases) and condition(current_case(), checks, case):
             if self.cases[index].color_name != case.color_name:
                 break
 
