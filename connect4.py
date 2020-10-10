@@ -11,7 +11,7 @@ class Connect4Party:
         self.height = height
         self.width = width
         self.default_color = '⚫'
-        self.cases = list(map(lambda position: Case(None, position), range(0, height * width)))
+        self.cases = list(map(lambda position: Case(self, None, position), range(0, height * width)))
 
         self.__player_position = 0
 
@@ -53,7 +53,7 @@ class Connect4Party:
 
         for case in self.cases:
             # Checks
-            if self.__check_cases__(case, lambda check_case : check_case.index <= case.position + 4 and check_case.line == case.line, 1) \
+            if self.__check_cases__(case, lambda check_case: check_case.index <= case.position + 4 and check_case.line == case.line, 1) \
                 or self.__check_cases__(case, lambda check_case: check_case.position <= case.position + (self.width * 4), self.width) \
                 or self.__check_cases__(case, lambda check_case, checks: check_case.position <= case.position + (self.width + 1) * 4 and check_case.line == case.line + checks, self.width - 1)\
                     or self.__check_cases__(case, lambda check_case, checks: check_case.position <= case.position + (self.width + 1) * 4 and check_case.line == case.line + checks) \

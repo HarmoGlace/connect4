@@ -3,8 +3,8 @@ from math import floor
 
 
 class CasesTypes(Enum):
-    red = ''
-    yellow = ''
+    red = 'mdr'
+    yellow = 'lol'
     blank = '⚫'
 
 
@@ -16,7 +16,7 @@ class Case:
 
     @property
     def color(self):
-        return CasesTypes(self.color_name if self.color_name else 'blank')
+        return CasesTypes[self.color_name if self.color_name else 'blank'].value
 
     @property
     def empty(self):
