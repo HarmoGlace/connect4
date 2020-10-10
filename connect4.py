@@ -1,4 +1,5 @@
 from case import Case
+from column import Column
 from player import Player
 
 
@@ -33,6 +34,9 @@ class Connect4Party:
     def increment_player(self):
         self.__player_position = self.__check_position(self.__player_position + 1)
         return self.current_player
+
+    def get_column(self, number):
+        return Column(self, number)
 
     def __check_cases__(self, case, condition, increase):
         checks = 0

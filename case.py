@@ -1,5 +1,6 @@
 from enum import Enum
 from math import floor
+from column import Column
 
 
 class CasesTypes(Enum):
@@ -13,6 +14,7 @@ class Case:
         self.party = party
         self.color_name = color
         self.position = position
+        self.column = Column(party, self.position % party.width)
 
     @property
     def color(self):
