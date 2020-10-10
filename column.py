@@ -21,6 +21,6 @@ class Column:
 
     def add_piece(self, color_name):
         if self.full: return False
-        
+
         to_add = self.blank_cases[0]
         to_add.color_name = color_name

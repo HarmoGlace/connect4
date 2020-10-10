@@ -4,8 +4,8 @@ from column import Column
 
 
 class CasesTypes(Enum):
-    red = 'mdr'
-    yellow = 'lol'
+    red = '🔴'
+    yellow = '🟡'
     blank = '⚫'
 
 

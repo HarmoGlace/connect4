@@ -19,3 +19,4 @@ print(column.full)
 for case in column.cases:
     print(case.position, case.color_name)
 
+print(party.__str__())
