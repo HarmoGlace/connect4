@@ -5,7 +5,9 @@ party = Connect4Party([{'id': 'lol', 'case': 'red'}, {'id': 'another', 'case': '
 while not party.results['finished']:
     print(party.__str__())
     current_player = party.current_player
-    column_number = int(input(f'{current_player.id}, play now! '))
+    column_number = int(input(f'{current_player.id}, play now! ')) + 1
 
     party.get_column(column_number).add_piece(current_player.color)
     party.increment_player()
+
+print('finished lol')

@@ -6,6 +6,8 @@ from player import Player
 
 
 class Connect4Party:
+    numbers = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣']
+
     def __init__(self, players, height=6, width=7):
         self.players = list(map(lambda player: Player(player['id'], player['case']), players))
         if len(players) <= 1:
@@ -74,9 +76,9 @@ class Connect4Party:
         for case in self.cases:
             # Checks
             if case.color_name is not None and (self.__check_cases__(case, linear_check, 1) \
-                    or self.__check_cases__(case, upward_check, self.width) \
-                    or self.__check_cases__(case, diag_left_to_right_check, self.width - 1) \
-                    or self.__check_cases__(case, diag_right_to_left_check, self.width + 1)) \
+                                                or self.__check_cases__(case, upward_check, self.width) \
+                                                or self.__check_cases__(case, diag_left_to_right_check, self.width - 1) \
+                                                or self.__check_cases__(case, diag_right_to_left_check, self.width + 1)) \
                     :
                 return {'finished': True, 'winner': case.player}
 
@@ -86,11 +88,17 @@ class Connect4Party:
         lines = self.__list__()
         return '\n'.join(lines)
 
-    def __list__(self):
+    def __list__(self, numbers=True):
         lines = []
         for line_number in range(0, self.height):
             lines.append(''.join(list(map(lambda case: colored('🟡', case.real_color_name),
                                           self.cases[line_number * self.width: self.width * (line_number + 1)]))))
+
+        if numbers:
+            indication = ''
+            for number in range(1, self.width + 1):
+                indication += self.numbers[number]
+            lines.append(colored(indication, 'blue'))
 
         lines.reverse()
         return lines
