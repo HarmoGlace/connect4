@@ -6,7 +6,7 @@ from column import Column
 class CasesTypes(Enum):
     red = '🔴'
     yellow = '🟡'
-    blank = '⚫'
+    white = '⚫'
 
 
 class Case:
@@ -22,16 +22,16 @@ class Case:
 
     @color_name.setter
     def color_name(self, color_name):
-        if CasesTypes[color_name if color_name else 'blank']:
+        if CasesTypes[color_name if color_name else 'white']:
             self.__color_name = color_name
 
     @property
     def color(self):
-        return CasesTypes[self.color_name if self.color_name else 'blank'].value
+        return CasesTypes[self.color_name if self.color_name else 'white'].value
 
     @property
     def empty(self):
-        return self.color_name == 'default'
+        return self.color_name is None
 
     @property
     def line(self):
