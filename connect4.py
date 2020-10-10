@@ -41,7 +41,7 @@ class Connect4Party:
         def current_case():
             return self.cases[index]
 
-        while condition(current_case(), checks) & index < len(self.cases):
+        while condition(current_case(), checks, case) and index < len(self.cases):
             if self.cases[index].color_name != case.color_name:
                 break
 
@@ -53,12 +53,24 @@ class Connect4Party:
     @property
     def results(self):
 
+        def linear_check(check_case, checks, base):
+            return check_case.position <= case.position + 4 and check_case.line == base.line
+
+        def upward_check(check_case, checks, base):
+            return check_case.position <= base.position + (self.width * 4)
+
+        def diag_left_to_right_check(check_case, checks, base):
+            return check_case.position <= base.position + (self.width + 1) * 4 and check_case.line == base.line + checks
+
+        def diag_right_to_left_check(check_case, checks, base):
+            return check_case.position <= base.position + (self.width + 1) * 4 and check_case.line == base.line + checks
+
         for case in self.cases:
             # Checks
-            if self.__check_cases__(case, lambda check_case: check_case.index <= case.position + 4 and check_case.line == case.line, 1) \
-                    or self.__check_cases__(case, lambda check_case: check_case.position <= case.position + (self.width * 4), self.width) \
-                    or self.__check_cases__(case, lambda check_case, checks: check_case.position <= case.position + (self.width + 1) * 4 and check_case.line == case.line + checks, self.width - 1) \
-                    or self.__check_cases__(case, lambda check_case, checks: check_case.position <= case.position + (self.width + 1) * 4 and check_case.line == case.line + checks, self.width + 1) \
+            if self.__check_cases__(case, linear_check, 1) \
+                    or self.__check_cases__(case, upward_check, self.width) \
+                    or self.__check_cases__(case, diag_left_to_right_check, self.width - 1) \
+                    or self.__check_cases__(case, diag_right_to_left_check, self.width + 1) \
                     :
                 return {'finished': True, 'winner': case.player}
 
