@@ -6,6 +6,8 @@ def clear_console():
     return print('\n' * 100)
 
 
+clear_console()
+
 player1 = input('Please provide the first player name: ')
 player2 = input('Please provide the second player name: ')
 
