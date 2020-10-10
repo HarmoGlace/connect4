@@ -92,7 +92,7 @@ class Connect4Party:
     def __list__(self, numbers=True):
         lines = []
         for line_number in range(0, self.height):
-            lines.append(''.join(list(map(lambda case: colored('🟡', case.real_color_name),
+            lines.append(''.join(list(map(lambda case: colored('🟢', case.real_color_name),
                                           self.cases[line_number * self.width: self.width * (line_number + 1)]))))
 
         if numbers:
