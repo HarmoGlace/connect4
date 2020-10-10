@@ -25,6 +25,6 @@ while not party.results['finished']:
     party.increment_player()
 
 winner = party.results['winner']
-name = winner is not None if winner.id else 'nobody'
+name = winner.id if winner is not None else 'nobody'
 print('The party is finished!')
 print(f'The winner is {name}')
