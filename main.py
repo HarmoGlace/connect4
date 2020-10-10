@@ -8,8 +8,19 @@ def clear_console():
 
 clear_console()
 
-player1 = input('Please provide the first player name: ')
-player2 = input('Please provide the second player name: ')
+player1 = None
+
+while player1 is None or player1.strip() == '':
+    player1 = input('Please provide the first player name: ')
+
+player2 = None
+
+while player2 is None or player2.strip() == '':
+    given = input('Please provide the second player name: ')
+    if given == player1:
+        print('This name is already used by the first player. Please choose another name!')
+        continue
+    player2 = given
 
 party = Connect4Party([{'id': player1, 'case': 'red'}, {'id': player2, 'case': 'yellow'}])
 
@@ -26,7 +37,7 @@ while not party.results['finished']:
     print_colors()
 
     current_player = party.current_player
-    raw_column_number = input(f'{current_player.id}, enter the column number you want to add your piece now! ')
+    raw_column_number = input(f'{colored(current_player.id, current_player.color)}, enter the column number you want to add your piece now! ')
 
     try:
         column_number = int(raw_column_number) - 1
