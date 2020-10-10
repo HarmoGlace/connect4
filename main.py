@@ -6,7 +6,9 @@ print(party.__str__())
 
 print(party.results)
 
-print()
+column = party.get_column(0)
 
-for case in party.get_column(0).cases:
+print(column.full)
+
+for case in column.cases:
     print(case.position)
