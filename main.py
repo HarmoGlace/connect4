@@ -43,6 +43,7 @@ while not party.results['finished']:
 
 clear_console()
 print(party.__str__())
+print_colors()
 winner = party.results['winner']
 name = winner.id if winner is not None else 'nobody'
 print('The party is finished!')
