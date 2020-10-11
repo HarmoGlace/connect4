@@ -3,6 +3,7 @@
 This project is a POC of a python connect4 fully usable in the console.
 
 ## Installation
+Python version needed: 3.6 at least
 1. Clone the repo with ``git clone https://github.com/HarmoGlace/connect4``
 2. Go to the main folder with ``cd connect4``
 2. Install required dependency with ``pip3 install -r requirements.txt``\
