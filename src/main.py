@@ -1,9 +1,18 @@
 from connect4 import Connect4Party
 from termcolor import colored
+from argparse import ArgumentParser
+from os import system, name
+
+parser = ArgumentParser()
+parser.add_argument('--u', '--unicode', dest='unicode', action='store_const',
+                    const=True, default=False,
+                    help='sum the integers (default: find the max)')
+
+unicode = parser.parse_args().unicode
 
 
 def clear_console():
-    return print('\n' * 100)
+    return system('cls' if name == 'nt' else 'clear')
 
 
 clear_console()
@@ -24,9 +33,15 @@ while player2 is None or player2.strip() == '':
 
 party = Connect4Party([{'id': player1, 'case': 'red'}, {'id': player2, 'case': 'yellow'}])
 
+if unicode:
+    party.default_color = '0'
+    party.numbers = []
+    for number in range(0, 9):
+        party.numbers.append(number.__str__())
+
 
 def print_colors():
-    players = ', '.join(list(map(lambda player: colored(f'{player.id}: 🟡', player.color), party.players)))
+    players = ', '.join(list(map(lambda player: colored(f'{player.id}: {party.default_color}', player.color), party.players)))
     return print(players)
 
 

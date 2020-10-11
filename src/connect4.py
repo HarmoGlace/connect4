@@ -15,7 +15,7 @@ class Connect4Party:
 
         self.height = height
         self.width = width
-        self.default_color = '⚫'
+        self.default_color = '🟢'
         self.cases = list(map(lambda position: Case(self, None, position), range(0, height * width)))
 
         self.__player_position = 0
@@ -92,7 +92,7 @@ class Connect4Party:
     def __list__(self, numbers=True):
         lines = []
         for line_number in range(0, self.height):
-            lines.append(''.join(list(map(lambda case: colored('🟢', case.real_color_name),
+            lines.append(''.join(list(map(lambda case: colored(self.default_color, case.real_color_name),
                                           self.cases[line_number * self.width: self.width * (line_number + 1)]))))
 
         if numbers:
