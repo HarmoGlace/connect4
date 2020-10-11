@@ -7,6 +7,9 @@ from player import Player
 
 class Connect4Party:
     numbers = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣']
+    default_color = '🟢'
+    win_cases = 4
+    __player_position = 0
 
     def __init__(self, players, height=6, width=7):
         self.players = list(map(lambda player: Player(player['id'], player['case']), players))
@@ -15,10 +18,7 @@ class Connect4Party:
 
         self.height = height
         self.width = width
-        self.default_color = '🟢'
         self.cases = list(map(lambda position: Case(self, None, position), range(0, height * width)))
-
-        self.__player_position = 0
 
     @property
     def full(self):
@@ -57,22 +57,22 @@ class Connect4Party:
             checks += 1
             index += increase
 
-        return checks >= 4
+        return checks >= self.win_cases
 
     @property
     def results(self):
 
         def linear_check(check_case, checks, base):
-            return check_case.position <= case.position + 4 and check_case.line == base.line
+            return check_case.position <= case.position + self.win_cases and check_case.line == base.line
 
         def upward_check(check_case, checks, base):
-            return check_case.position <= base.position + (self.width * 4)
+            return check_case.position <= base.position + (self.width * self.win_cases)
 
         def diag_left_to_right_check(check_case, checks, base):
-            return check_case.position <= base.position + (self.width + 1) * 4 and check_case.line == base.line + checks
+            return check_case.position <= base.position + (self.width + 1) * self.win_cases and check_case.line == base.line + checks
 
         def diag_right_to_left_check(check_case, checks, base):
-            return check_case.position <= base.position + (self.width + 1) * 4 and check_case.line == base.line + checks
+            return check_case.position <= base.position + (self.width + 1) * self.win_cases and check_case.line == base.line + checks
 
         for case in self.cases:
             # Checks
