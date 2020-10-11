@@ -1,8 +1,8 @@
 from termcolor import colored
 
-from src.case import Case
-from src.column import Column
-from src.player import Player
+from case import Case
+from column import Column
+from player import Player
 
 
 class Connect4Party:
