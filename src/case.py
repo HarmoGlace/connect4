@@ -22,12 +22,12 @@ class Case:
 
     @color_name.setter
     def color_name(self, color_name):
-        if CasesTypes[color_name if color_name else 'white']:
+        if CasesTypes[color_name or 'white']:
             self.__color_name = color_name
 
     @property
     def real_color_name(self):
-        return self.color_name if self.color_name else 'white'
+        return self.color_name or 'white'
 
     @property
     def color(self):

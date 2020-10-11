@@ -27,7 +27,7 @@ player2 = None
 while player2 is None or player2.strip() == '':
     given = input('Please provide the second player name: ')
     if given == player1:
-        print(colored('This name is already used by the first player. Please choose another name!', 'red'))
+        print(colored('This name is already used by the first player. Please choose another name.', 'red'))
         continue
     player2 = given
 
@@ -53,7 +53,7 @@ while not party.results['finished']:
 
     current_player = party.current_player
     raw_column_number = input(
-        f'{colored(current_player.id, current_player.color)}, enter the column number you want to add your piece now! ')
+        f'{colored(current_player.id, current_player.color)}, enter the column number you want to add your piece now: ')
 
     try:
         column_number = int(raw_column_number) - 1
@@ -84,6 +84,6 @@ clear_console()
 print(party.__str__())
 print_colors()
 winner = party.results['winner']
-name = winner.id if winner is not None else 'nobody'
-print('The party is finished!')
-print(f'The winner is {name}')
+name = winner.colored_name if winner is not None else 'nobody'
+print(colored(f'The party is finished!\nThe winner is {name}', 'green'))
+# print(f'The winner is {name}')
