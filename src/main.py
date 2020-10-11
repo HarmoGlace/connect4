@@ -2,6 +2,11 @@ from connect4 import Connect4Party
 from termcolor import colored
 from argparse import ArgumentParser
 from os import system, name
+import ctypes
+
+
+if name == 'nt':
+    ctypes.windll.kernel32.SetConsoleTitleW("Connect4 Party - HarmoGlace")
 
 parser = ArgumentParser()
 parser.add_argument('--u', '--unicode', dest='unicode', action='store_const',
@@ -41,7 +46,8 @@ if unicode:
 
 
 def print_colors():
-    players = ', '.join(list(map(lambda player: colored(f'{player.id}: {party.default_color}', player.color), party.players)))
+    players = ', '.join(
+        list(map(lambda player: colored(f'{player.id}: {party.default_color}', player.color), party.players)))
     return print(players)
 
 
