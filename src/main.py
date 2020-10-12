@@ -11,7 +11,7 @@ if name == 'nt':
 parser = ArgumentParser()
 parser.add_argument('--u', '--unicode', dest='unicode', action='store_const',
                     const=True, default=False,
-                    help='sum the integers (default: find the max)')
+                    help='Will only use alphanumeric characters. Note that the terminal needs to support colors')
 
 unicode = parser.parse_args().unicode
 
@@ -76,7 +76,6 @@ while not party.results['finished']:
         continue
 
     added = column.add_piece(current_player.color)
-    print(added)
 
     if not added:
         clear_console()
@@ -86,7 +85,7 @@ while not party.results['finished']:
     party.increment_player()
     clear_console()
 
-clear_console()
+
 print(party.__str__())
 print_colors()
 winner = party.results['winner']
