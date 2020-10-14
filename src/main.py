@@ -24,12 +24,12 @@ clear_console()
 
 player1 = None
 
-while player1 is None or player1.strip() == '':
+while player1 is None or not player1.strip():
     player1 = input('Please provide the first player name: ')
 
 player2 = None
 
-while player2 is None or player2.strip() == '':
+while player2 is None or not player2.strip():
     given = input('Please provide the second player name: ')
     if given == player1:
         print(colored('This name is already used by the first player. Please choose another name.', 'red'))
