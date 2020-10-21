@@ -63,7 +63,7 @@ while not party.results['finished']:
 
     try:
         column_number = int(raw_column_number) - 1
-    except:
+    except ValueError:
         clear_console()
         print(colored('Please provide a valid column number.', 'red'))
         continue
