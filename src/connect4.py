@@ -19,6 +19,8 @@ class Connect4Party:
         self.height = int(kwargs.get('height', 6))
         self.width = int(kwargs.get('width', 7))
 
+        if kwargs.get('win_cases'): self.win_cases = int(kwargs.get('win_cases'))
+
         self.cases = list(map(lambda position: Case(self, None, position), range(0, self.height * self.width)))
 
     @property

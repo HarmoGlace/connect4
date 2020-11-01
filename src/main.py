@@ -23,6 +23,9 @@ parser.add_argument('--h', '--height', dest='height', default=6,
 parser.add_argument('--w', '--width', dest='width', default=7,
                     help='Change the width of the connect 4 grid')
 
+parser.add_argument('--wc', '--win-cases', '--win-case', dest='win_cases', default=4, help='Change the default cases '
+                                                                                           'needed to win')
+
 args = parser.parse_args()
 unicode = args.unicode
 dimensions = {'height': None, 'width': None}
@@ -30,10 +33,19 @@ dimensions = {'height': None, 'width': None}
 try:
     dimensions['height'] = int(args.height)
     dimensions['width'] = int(args.width)
-    if dimensions['height'] <= 0 or dimensions['width'] <= 0: raise ValueError('Height and with arguments need to be '
-                                                                               'positive integers.')
+    if dimensions['height'] <= 0 or dimensions['width'] <= 0:
+        raise ValueError('Height and with arguments need to be positive integers.')
 except ValueError:
     print(f'Invalid width or height argument. Please provide a valid positive integer')
+    exit(1)
+
+win_cases = None
+try:
+    win_cases = int(args.win_cases)
+    if not 1 < win_cases <= min(dimensions['width'], dimensions['height']):
+        raise ValueError('win-cases argument need to be a positive integer less or equal to width and height')
+except ValueError:
+    print('Please provided a valid win cases positive integer, less or equal to width and height')
     exit(1)
 
 clear_console()
@@ -52,12 +64,13 @@ while player2 is None or not player2.strip():
         continue
     player2 = given
 
-party = Connect4Party([{'id': player1, 'case': 'red'}, {'id': player2, 'case': 'yellow'}], height=dimensions['height'], width=dimensions['width'])
+party = Connect4Party([{'id': player1, 'case': 'red'}, {'id': player2, 'case': 'yellow'}], height=dimensions['height'],
+                      width=dimensions['width'], win_cases=win_cases)
 
 if unicode:
     party.default_color = '0'
     party.numbers = []
-    for number in range(0, 9):
+    for number in range(0, party.width + 1):
         party.numbers.append(number.__str__())
 
 
