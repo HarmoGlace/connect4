@@ -13,7 +13,7 @@ if name == 'nt':
     ctypes.windll.kernel32.SetConsoleTitleW("Connect4 Party - HarmoGlace")
 
 parser = ArgumentParser()
-parser.add_argument('--hide-lines', '--h-d', dest='hide_lines', action='store_const',
+parser.add_argument('--hide-lines', '--h-l', dest='hide_lines', action='store_const',
                     const=True, default=True,
                     help='Will only use alphanumeric characters. Note that the terminal needs to support colors')
 
