@@ -25,7 +25,7 @@ parser.add_argument('--w', '--width', dest='width', default=7,
 
 args = parser.parse_args()
 unicode = args.unicode
-dimensions = {'height': None, 'width': False}
+dimensions = {'height': None, 'width': None}
 
 try:
     dimensions['height'] = int(args.height)
@@ -33,8 +33,7 @@ try:
     if dimensions['height'] <= 0 or dimensions['width'] <= 0: raise ValueError('Height and with arguments need to be '
                                                                                'positive integers.')
 except ValueError:
-    source = 'height' if dimensions['width'] is False else 'width'
-    print(f'Invalid {source} argument, received {dimensions[source]}. Please provide a valid positive integer')
+    print(f'Invalid width or height argument, received width: {dimensions["width"]} height: {dimensions["height"]}. Please provide a valid positive integer')
     exit(1)
 
 clear_console()
