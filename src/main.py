@@ -33,7 +33,7 @@ try:
     if dimensions['height'] <= 0 or dimensions['width'] <= 0: raise ValueError('Height and with arguments need to be '
                                                                                'positive integers.')
 except ValueError:
-    print(f'Invalid width or height argument, received. Please provide a valid positive integer')
+    print(f'Invalid width or height argument. Please provide a valid positive integer')
     exit(1)
 
 clear_console()
