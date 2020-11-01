@@ -6,8 +6,8 @@ from player import Player
 
 
 class Connect4Party:
-    numbers = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣']
-    default_color = '🟢'
+    numbers = list(map(str, list(range(0, 9))))
+    default_case = '0'
     win_cases = 4
     __player_position = 0
 
@@ -73,11 +73,11 @@ class Connect4Party:
 
         def diag_left_to_right_check(check_case, checks, base):
             return check_case.position <= base.position + (
-                        self.width + 1) * self.win_cases and check_case.line == base.line + checks
+                    self.width + 1) * self.win_cases and check_case.line == base.line + checks
 
         def diag_right_to_left_check(check_case, checks, base):
             return check_case.position <= base.position + (
-                        self.width + 1) * self.win_cases and check_case.line == base.line + checks
+                    self.width + 1) * self.win_cases and check_case.line == base.line + checks
 
         for case in self.cases:
             # Checks
@@ -97,7 +97,7 @@ class Connect4Party:
     def __list__(self, numbers=True, lines_numbers=True):
         lines = []
         for line_number in range(0, self.height):
-            lines.append(''.join(list(map(lambda case: colored(self.default_color, case.real_color_name),
+            lines.append(''.join(list(map(lambda case: colored(self.default_case, case.real_color_name),
                                           self.cases[line_number * self.width: self.width * (line_number + 1)]))))
 
         if lines_numbers:
@@ -107,7 +107,7 @@ class Connect4Party:
                 start += 1
 
         if numbers:
-            indication = '' if not lines_numbers else ' ' # Add padding to avoid conflict
+            indication = '' if not lines_numbers else ' '  # Add padding to avoid conflict
             for number in range(1, min(self.width + 1, len(self.numbers))):
                 indication += self.numbers[number]
             lines.append(colored(indication, 'blue'))

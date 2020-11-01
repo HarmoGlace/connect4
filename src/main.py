@@ -13,8 +13,8 @@ if name == 'nt':
     ctypes.windll.kernel32.SetConsoleTitleW("Connect4 Party - HarmoGlace")
 
 parser = ArgumentParser()
-parser.add_argument('--u', '--unicode', dest='unicode', action='store_const',
-                    const=True, default=False,
+parser.add_argument('--hide-lines', '--h-d', dest='hide_lines', action='store_const',
+                    const=True, default=True,
                     help='Will only use alphanumeric characters. Note that the terminal needs to support colors')
 
 parser.add_argument('--h', '--height', dest='height', default=6,
@@ -27,7 +27,6 @@ parser.add_argument('--wc', '--win-cases', '--win-case', dest='win_cases', defau
                                                                                            'needed to win')
 
 args = parser.parse_args()
-unicode = args.unicode
 dimensions = {'height': None, 'width': None}
 
 try:
@@ -67,23 +66,17 @@ while player2 is None or not player2.strip():
 party = Connect4Party([{'id': player1, 'case': 'red'}, {'id': player2, 'case': 'yellow'}], height=dimensions['height'],
                       width=dimensions['width'], win_cases=win_cases)
 
-if unicode:
-    party.default_color = '0'
-    party.numbers = []
-    for number in range(0, party.width + 1):
-        party.numbers.append(number.__str__())
-
 
 def print_colors():
     players = ', '.join(
-        list(map(lambda player: colored(f'{player.id}: {party.default_color}', player.color), party.players)))
+        list(map(lambda player: colored(f'{player.id}: {party.default_case}', player.color), party.players)))
     return print(players)
 
 
 clear_console()
 
 while not party.results['finished']:
-    print(party.__str__())
+    print(party)
     print_colors()
 
     current_player = party.current_player
@@ -119,4 +112,3 @@ print_colors()
 winner = party.results['winner']
 name = winner.colored_name if winner is not None else 'nobody'
 print(colored(f'The party is finished!\nThe winner is {name}', 'green'))
-# print(f'The winner is {name}')
