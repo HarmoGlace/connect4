@@ -14,7 +14,7 @@ if name == 'nt':
 
 parser = ArgumentParser()
 parser.add_argument('--hide-lines', '--h-l', dest='hide_lines', action='store_const',
-                    const=True, default=True,
+                    const=True, default=False,
                     help='Will only use alphanumeric characters. Note that the terminal needs to support colors')
 
 parser.add_argument('--h', '--height', dest='height', default=6,
@@ -27,6 +27,7 @@ parser.add_argument('--wc', '--win-cases', '--win-case', dest='win_cases', defau
                                                                                            'needed to win')
 
 args = parser.parse_args()
+others_options = {'line_numbers': not args.hide_lines}
 dimensions = {'height': None, 'width': None}
 
 try:
@@ -76,7 +77,7 @@ def print_colors():
 clear_console()
 
 while not party.results['finished']:
-    print(party)
+    print(party.__str__(**others_options))
     print_colors()
 
     current_player = party.current_player
@@ -107,7 +108,7 @@ while not party.results['finished']:
     party.increment_player()
     clear_console()
 
-print(party.__str__())
+print(party.__str__(**others_options))
 print_colors()
 winner = party.results['winner']
 name = winner.colored_name if winner is not None else 'nobody'

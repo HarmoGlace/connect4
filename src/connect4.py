@@ -90,11 +90,14 @@ class Connect4Party:
 
         return {'finished': self.full, 'winner': None}
 
-    def __str__(self, *args):
-        lines = self.__list__(*args)
+    def __str__(self, **kwargs):
+        lines = self.__list__(**kwargs)
         return '\n'.join(lines)
 
-    def __list__(self, numbers=True, lines_numbers=True):
+    def __list__(self, **kwargs):
+        numbers = kwargs.get('numbers', True)
+        lines_numbers = kwargs.get('line_numbers', True)
+
         lines = []
         for line_number in range(0, self.height):
             lines.append(''.join(list(map(lambda case: colored(self.default_case, case.real_color_name),
