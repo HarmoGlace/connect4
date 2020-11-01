@@ -22,7 +22,7 @@ class Connect4Party:
 
     @property
     def full(self):
-        return len(list(filter(lambda case: case.color_name is None, self.cases))) == 0
+        return not len(list(filter(lambda case: case.color_name is None, self.cases)))
 
     @property
     def current_player(self):
