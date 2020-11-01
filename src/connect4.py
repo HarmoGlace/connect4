@@ -11,14 +11,15 @@ class Connect4Party:
     win_cases = 4
     __player_position = 0
 
-    def __init__(self, players, height=6, width=7):
+    def __init__(self, players, **kwargs):
         self.players = list(map(lambda player: Player(player['id'], player['case']), players))
         if len(players) <= 1:
             raise Exception(f'Please provide at least two players. Received only {len(players)} player(s)')
 
-        self.height = height
-        self.width = width
-        self.cases = list(map(lambda position: Case(self, None, position), range(0, height * width)))
+        self.height = int(kwargs.get('height', 6))
+        self.width = int(kwargs.get('width', 7))
+
+        self.cases = list(map(lambda position: Case(self, None, position), range(0, self.height * self.width)))
 
     @property
     def full(self):
@@ -69,10 +70,12 @@ class Connect4Party:
             return check_case.position <= base.position + (self.width * self.win_cases)
 
         def diag_left_to_right_check(check_case, checks, base):
-            return check_case.position <= base.position + (self.width + 1) * self.win_cases and check_case.line == base.line + checks
+            return check_case.position <= base.position + (
+                        self.width + 1) * self.win_cases and check_case.line == base.line + checks
 
         def diag_right_to_left_check(check_case, checks, base):
-            return check_case.position <= base.position + (self.width + 1) * self.win_cases and check_case.line == base.line + checks
+            return check_case.position <= base.position + (
+                        self.width + 1) * self.win_cases and check_case.line == base.line + checks
 
         for case in self.cases:
             # Checks
@@ -97,7 +100,7 @@ class Connect4Party:
 
         if numbers:
             indication = ''
-            for number in range(1, self.width + 1):
+            for number in range(1, min(self.width + 1, len(self.numbers))):
                 indication += self.numbers[number]
             lines.append(colored(indication, 'blue'))
 

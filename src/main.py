@@ -5,6 +5,10 @@ from os import system, name
 import ctypes
 
 
+def clear_console():
+    return system('cls' if name == 'nt' else 'clear')
+
+
 if name == 'nt':
     ctypes.windll.kernel32.SetConsoleTitleW("Connect4 Party - HarmoGlace")
 
@@ -13,12 +17,25 @@ parser.add_argument('--u', '--unicode', dest='unicode', action='store_const',
                     const=True, default=False,
                     help='Will only use alphanumeric characters. Note that the terminal needs to support colors')
 
-unicode = parser.parse_args().unicode
+parser.add_argument('--h', '--height', dest='height', default=6,
+                    help='Change the height of the connect 4 grid')
 
+parser.add_argument('--w', '--width', dest='width', default=7,
+                    help='Change the width of the connect 4 grid')
 
-def clear_console():
-    return system('cls' if name == 'nt' else 'clear')
+args = parser.parse_args()
+unicode = args.unicode
+dimensions = {'height': None, 'width': False}
 
+try:
+    dimensions['height'] = int(args.height)
+    dimensions['width'] = int(args.width)
+    if dimensions['height'] <= 0 or dimensions['width'] <= 0: raise ValueError('Height and with arguments need to be '
+                                                                               'positive integers.')
+except ValueError:
+    source = 'height' if dimensions['width'] is False else 'width'
+    print(f'Invalid {source} argument, received {dimensions[source]}. Please provide a valid positive integer')
+    exit(1)
 
 clear_console()
 
@@ -36,7 +53,7 @@ while player2 is None or not player2.strip():
         continue
     player2 = given
 
-party = Connect4Party([{'id': player1, 'case': 'red'}, {'id': player2, 'case': 'yellow'}])
+party = Connect4Party([{'id': player1, 'case': 'red'}, {'id': player2, 'case': 'yellow'}], height=dimensions['height'], width=dimensions['width'])
 
 if unicode:
     party.default_color = '0'
@@ -84,7 +101,6 @@ while not party.results['finished']:
 
     party.increment_player()
     clear_console()
-
 
 print(party.__str__())
 print_colors()
