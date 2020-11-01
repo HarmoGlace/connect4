@@ -94,14 +94,20 @@ class Connect4Party:
         lines = self.__list__(*args)
         return '\n'.join(lines)
 
-    def __list__(self, numbers=True):
+    def __list__(self, numbers=True, lines_numbers=True):
         lines = []
         for line_number in range(0, self.height):
             lines.append(''.join(list(map(lambda case: colored(self.default_color, case.real_color_name),
                                           self.cases[line_number * self.width: self.width * (line_number + 1)]))))
 
+        if lines_numbers:
+            start = 0
+            for number in range(1, min(self.height + 1, len(self.numbers))):
+                lines[start] = f'{colored(number, "magenta")}{lines[start]}'
+                start += 1
+
         if numbers:
-            indication = ''
+            indication = '' if not lines_numbers else ' ' # Add padding to avoid conflict
             for number in range(1, min(self.width + 1, len(self.numbers))):
                 indication += self.numbers[number]
             lines.append(colored(indication, 'blue'))
